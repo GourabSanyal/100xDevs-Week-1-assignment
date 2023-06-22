@@ -8,8 +8,68 @@
   - `npm run test-expenditure-analysis`
 */
 
+transactions = [
+  {
+      "itemName": "Item 1",
+      "category": "Category A",
+      "price": 10,
+      "timestamp": "2023-06-10"
+  },
+  {
+      "itemName": "Item 2",
+      "category": "Category B",
+      "price": 20,
+      "timestamp": "2023-06-11"
+  },
+  {
+      "itemName": "Item 3",
+      "category": "Category A",
+      "price": 15,
+      "timestamp": "2023-06-12"
+  },
+  {
+      "itemName": "Item 4",
+      "category": "Category C",
+      "price": 5,
+      "timestamp": "2023-06-13"
+  },
+  {
+      "itemName": "Item 5",
+      "category": "Category B",
+      "price": 10,
+      "timestamp": "2023-06-14"
+  }
+]
+
+
 function calculateTotalSpentByCategory(transactions) {
-  return [];
+  var categoryTotals = {};
+
+  for (var i = 0; i < transactions.length; i++) {
+    var category = transactions[i].category;
+    var price = transactions[i].price;
+
+    if (category in categoryTotals) {
+      categoryTotals[category] += price;
+    } else {
+      categoryTotals[category] = price;
+    }
+  }
+
+  var res = [];
+
+  // Generate the list of objects with category totals
+  for (var category in categoryTotals) {
+    var categoryObj = {};
+    categoryObj[category] = categoryTotals[category];
+    res.push(categoryObj);
+  }
+
+  return res;
 }
+
+
+var ans = calculateTotalSpentByCategory(transactions)
+console.log(ans)
 
 module.exports = calculateTotalSpentByCategory;
